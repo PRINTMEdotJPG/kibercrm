@@ -1,0 +1,16 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.alert {
+    margin-bottom: 15px;
+}
+
+.btn {
+    width: 100%;
+}

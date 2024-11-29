@@ -1,0 +1,8 @@
+{% extends 'usersroles/base.html' %}
+
+{% block content %}
+    <h1>Панель администратора</h1>
+    {% for user in users %}
+        <h2>{{ user.username }} -> {{ user.role }} </h2>
+    {% endfor %}
+{% endblock %}
