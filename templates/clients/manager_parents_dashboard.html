@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/managerparents.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="parentchild-container">
+    <div class="parent-container">
+        {% for parent in parents %}
+        <div class="parent">
+            <h2>{{ parent.last_name }}</h2>
+            <h2>{{ parent.name }}</h2>
+            <h2>{{ parent.patronymic }}</h2>
+            <h2>{{ parent.phone_number }}</h2>
+            {% if parent.children.all %}
+            {% for children in parent.children.all %}
+            <h2>{{children.name }}</h2>
+            {% endfor %}
+            {% else %}
+            <h2 class="childerror">Детей нет</h2>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="child-container"></div>
+</section>
+{% endblock %}

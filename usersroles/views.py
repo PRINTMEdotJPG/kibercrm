@@ -40,3 +40,9 @@ def admin_dashboard(request):
     return render(request, 'usersroles/admin_dashboard.html', {
         'users': users
         })
+
+def manager_dashboard(request):
+    users = CustomUser.objects.all()
+    return render(request, 'usersroles/manager_dashboard.html', {
+        'users': users
+        })
