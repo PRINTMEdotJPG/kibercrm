@@ -9,3 +9,5 @@ urlpatterns = (
     path('manager/dashboard/', manager_dashboard, name='manager_dashboard'),
     #path('tora/dashboard/', tora_dashboard, name='tora_dashboard'),
 )
+
+

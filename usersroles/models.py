@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from location.models import Location
 
 class CustomUser(AbstractUser):
     class Roles(models.TextChoices):
@@ -19,6 +20,11 @@ class CustomUser(AbstractUser):
         verbose_name="ФИО",
         blank=True
     )
+    linked_locations = models.ManyToManyField(
+        Location,
+        related_name="staff",
+        verbose_name="Закрепленные локации для работы",
+        )
 
 
     # Методы проверки ролей

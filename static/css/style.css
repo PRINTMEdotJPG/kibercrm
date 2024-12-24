@@ -1,3 +1,44 @@
+/* static/css/style.css */
+body {
+    background: linear-gradient(135deg, #3e2857 0%, #3f26a0 100%);
+    min-height: 100vh;
+    color: white;
+}
+
+.navbar {
+    background: rgba(58, 29, 88, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.7%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+
 .login-container {
     max-width: 400px;
     margin: 50px auto;
@@ -13,4 +54,8 @@
 
 .btn {
     width: 100%;
+}
+
+.container {
+    color: white;
 }

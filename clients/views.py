@@ -8,8 +8,10 @@ from django.contrib import messages
 def view_parents(request):
     if request.user.role in ('MANAGER', 'DIRECTOR'):
         parents = Parent.objects.all()
+        print(parents[0].children.all()[0].name)
         return render(request, 'clients/manager_parents_dashboard.html', {
             'parents': parents
             })
+        
     messages.error(request, 'У вас нет доступа к этой странице.')
     return redirect('login')

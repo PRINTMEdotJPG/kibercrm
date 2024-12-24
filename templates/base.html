@@ -1,69 +1,145 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>{% block title %}Мой сайт{% endblock %}</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CRM System{% endblock %}</title>
 
-    {% block extra_css %}
-    {% endblock %}
+    <!-- CSS -->
+    <link href="{% static 'css/style.css' %}?v=1.0" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        {% if user.is_authenticated %}
-            {% if user.role == 'DIRECTOR' %}
-                <!-- Меню администратора -->
-                <a class="navbar-brand" href="#">Администратор</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}">Панель управления</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'view_parents' %}">Панель управления родителями</a></li>
-                    </ul>
-                </div>
-            {% elif user.role == 'MANAGER' %}
-                <!-- Меню менеджера -->
-                <a class="navbar-brand" href="#">Менеджер</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        
-                        <li class="nav-item"><a class="nav-link" href="{% url 'manager_dashboard' %}">Панель менеджера</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'view_parents' %}">Панель управления родителями</a></li>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+               
+                CRM System
+            </a>
 
-                    </ul>
-                </div>
-            {% else %}
-                <!-- Меню пользователя -->
-                <a class="navbar-brand" href="#">Тьютор/Ассистент</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        
-                   </ul>
-                </div>
-            {% endif %}
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <span class="nav-link">Привет, {{ user.username }}!</span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Выход</a>
-                </li>
-            </ul>
-        {% else %}
-            <a class="navbar-brand" href="#">Мой сайт</a>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Вход</a></li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            </ul>
-        {% endif %}
+            <div class="collapse navbar-collapse" id="navbarContent">
+                {% if user.is_authenticated %}
+                    {% if user.role == 'DIRECTOR' %}
+                        <!-- Меню администратора -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'admin_dashboard' %}">
+                                    <i class="fas fa-tachometer-alt"></i> Панель управления
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'view_parents' %}">
+                                    <i class="fas fa-users"></i> Управление родителями
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" 
+                                   data-bs-toggle="dropdown">
+                                    <i class="fas fa-cog"></i> Администрирование
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="#">Настройки системы</a></li>
+                                    <li><a class="dropdown-item" href="#">Управление пользователями</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#">Логи системы</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    {% elif user.role == 'MANAGER' %}
+                        <!-- Меню менеджера -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'manager_dashboard' %}">
+                                    <i class="fas fa-chart-line"></i> Панель менеджера
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'view_parents' %}">
+                                    <i class="fas fa-user-friends"></i> Управление родителями
+                                </a>
+                            </li>
+                        </ul>
+
+                    {% else %}
+                        <!-- Меню тьютора/ассистента -->
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-calendar-alt"></i> Расписание
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-tasks"></i> Задачи
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    <!-- Правая часть навбара для авторизованных пользователей -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" 
+                               id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <img src="{% static 'img/default-avatar.png' %}" alt="Avatar" class="user-avatar">
+                                <span class="ms-2">{{ user.get_full_name|default:user.username }}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="#">
+                                    <i class="fas fa-user-circle"></i> Профиль
+                                </a></li>
+                                <li><a class="dropdown-item" href="#">
+                                    <i class="fas fa-cog"></i> Настройки
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="fas fa-sign-out-alt"></i> Выход
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                {% else %}
+                    <!-- Навбар для неавторизованных пользователей -->
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fas fa-sign-in-alt"></i> Вход
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
     </nav>
 
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
+    <!-- Основной контент -->
+    <div class="container mt-5 pt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

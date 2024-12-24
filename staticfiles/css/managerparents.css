@@ -1,0 +1,12 @@
+.parent h2 {
+    font-size: 1em;
+}
+
+.parent {
+    display: flex;
+    gap: 10px;
+}
+
+.childerror {
+    color: red;
+}

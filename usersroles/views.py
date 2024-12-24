@@ -18,6 +18,8 @@ def login_view(request):
                 # Редирект в зависимости от роли
                 if user.role == 'DIRECTOR':
                     return redirect('admin_dashboard')
+                elif user.role == 'MANAGER':
+                    return redirect('manager_dashboard')
                 #elif user.role == 'manager':
                  #   return redirect('manager_dashboard')
                 #else:
