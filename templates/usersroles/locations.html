@@ -1,0 +1,14 @@
+{% extends '../base.html' %}
+
+{% block title %}
+Доступные локации
+{% endblock %}
+
+{% block content %}
+{% for location in linked_locations %}
+<div class="location-card">
+    <p>{{ location.name }}</p>
+</div>
+
+{% endfor %}
+{% endblock content %}

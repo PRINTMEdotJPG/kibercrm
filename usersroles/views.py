@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 from django.contrib import messages
 from .forms import LoginForm
 from .models import CustomUser
@@ -48,3 +50,12 @@ def manager_dashboard(request):
     return render(request, 'usersroles/manager_dashboard.html', {
         'users': users
         })
+
+@login_required  # Убедитесь, что пользователь аутентифицирован
+def linked_manager_locations_dashboard(request):
+    user = request.user  # Получаем текущего пользователя
+    linked_locations = user.linked_locations.all()  # Получаем связанные локации
+
+    return render(request, 'usersroles/locations.html', {
+        'linked_locations': linked_locations  # Передаем только связанные локации
+    })
