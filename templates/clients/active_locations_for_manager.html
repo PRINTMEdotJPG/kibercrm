@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Мои локации{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/active_locations_style.css' %}?v=1.0" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="locations-container">
+    <div class="header-actions">
+        <h1 class="page-title">Мои локации</h1>
+    </div>
+
+    <div class="locations-grid">
+        {% for location in locations %}
+        <a href="{% url 'location_parents' location.id %}">
+        <div class="location-card">
+            <h2 class="location-name">{{ location.name }}</h2>
+            <div class="location-stats">
+                <div class="location-stat">
+                    {{ location.address }}
+                </div>
+                <div class="location-stat">
+                    {{ location.num_students }} детей учатся на локации
+                </div>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

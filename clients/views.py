@@ -1,17 +1,47 @@
-from django.shortcuts import render, redirect
-from .models import Parent, Child
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+# views.py
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Parent
+from usersroles.models import CustomUser
+from location.models import Location
+from django.db.models import Count
+from django.core.exceptions import PermissionDenied
+
+# views.py
 
 @login_required
-def view_parents(request):
-    if request.user.role in ('MANAGER', 'DIRECTOR'):
-        parents = Parent.objects.all()
-        print(parents[0].children.all()[0].name)
-        return render(request, 'clients/manager_parents_dashboard.html', {
-            'parents': parents
-            })
-        
-    messages.error(request, 'У вас нет доступа к этой странице.')
-    return redirect('login')
+def manager_locations(request):
+    user = request.user
+    locations = user.linked_locations.annotate(num_students=Count('students'))
+    context = {'locations': locations,
+               }
+    return render(request, 'clients/active_locations_for_manager.html', context)
+
+# views.py
+
+@login_required
+def location_parents(request, location_id):
+    user = request.user
+    if user.role not in ("MANAGER", "DIRECTOR"):
+        return redirect('/login')
+    location = get_object_or_404(Location, id=location_id)
+
+    if user.role == CustomUser.Roles.DIRECTOR:
+        # Директор видит всех родителей в локации
+        parents = Parent.objects.filter(location=location)
+    elif user.role == CustomUser.Roles.MANAGER:
+        if location in user.linked_locations.all():
+            # Менеджер видит родителей только из своих локаций
+            parents = Parent.objects.filter(location=location)
+        else:
+            # Если локация не принадлежит менеджеру, доступ запрещен
+            
+            raise PermissionDenied
+
+    context = {
+        'parents': parents,
+        'location': location
+    }
+    return render(request, 'clients/manager_parents_dashboard.html', context)
+

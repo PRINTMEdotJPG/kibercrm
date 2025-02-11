@@ -5,76 +5,69 @@
 <link href="{% static 'css/managerparents.css' %}?v=1.0" rel="stylesheet">
 {% endblock %}
 
-
 {% block content %}
 <div class="container">
     <!-- Control Panel -->
-    <div class="control-panel">
+    <div class="control-panel mb-4">
         <div class="d-flex justify-content-between align-items-center">
             <h3 class="text-white mb-0">Управление родителями</h3>
             <div class="d-flex gap-3">
                 <button class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Добавить родителя
                 </button>
-                <button class="btn btn-outline">
+                <button class="btn btn-outline-light">
                     <i class="fas fa-file-export me-2"></i>Экспорт
                 </button>
-                <button class="btn btn-outline">
+                <button class="btn btn-outline-light">
                     <i class="fas fa-filter me-2"></i>Фильтры
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Parents Grid -->
-    <div class="row g-4">
-        {% for parent in parents %}
-        <div class="col-lg-4 col-md-6">
-            <div class="parent-card">
-                <div class="card-header">
-                    <h5 class="text-white mb-0">
-                        <i class="fas fa-user-circle me-2"></i>
-                        {{ parent.last_name }} {{ parent.name }}
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="info-block">
-                        <small class="text-white-50">Телефон</small>
-                        <p class="text-white mb-0">
-                            <i class="fas fa-phone me-2"></i>
-                            {{ parent.phone_number }}
-                        </p>
-                    </div>
-                    <div class="info-block">
-                        <small class="text-white-50">Ребёнок</small>
-                        {% if parent.children.all %}
-                        <p class="text-white mb-0">
-                        <i class="fas fa-child me-2"></i>
-                        {% for children in parent.children.all %}
-                            
-                            {{ children.name }}
+    <!-- Parents Table -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="text-white" style="background-color: #4527a0;">
+                <th>Имя родителя</th>
+                <th>Телефон</th>
+                <th>Дети</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parent in parents %}
+            <tr class="text-white">
+                <td>{{ parent.last_name }} {{ parent.name }}</td>
+                <td>
+                    <i class="fas fa-phone me-2"></i> 
+                    {{ parent.phone_number }}
+                </td>
+                <td>
+                    {% if parent.children.all %}
+                    <ul>
+                        {% for child in parent.children.all %}
+                        <li>{{ child.name }}</li>
                         {% endfor %}
-                        {% else %}
-                        <p class="error-info mb-0">
-                        <i class="fas fa-child me-2"></i>
-                        Детей нет
-                        {% endif %}
-                        </p>
-                    </div>
-                    <span class="status-badge">Активный</span>
-                    <div class="action-buttons">
-                        <button class="btn btn-outline flex-grow-1">
-                            <i class="fas fa-comments me-2"></i>Сообщение
-                        </button>
-                        <button class="btn btn-outline flex-grow-1">
-                            <i class="fas fa-calendar-plus me-2"></i>Записать
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+                    </ul>
+                    {% else %}
+                    <span class="text-danger">Нет детей</span>
+                    {% endif %}
+                </td>
+                <td><span class="badge bg-success">Активный</span></td>
+                <td>
+                    <button class="btn btn-outline-primary">
+                        <i class="fas fa-comments me-2"></i>Сообщение
+                    </button>
+                    <button class="btn btn-outline-success">
+                        <i class="fas fa-calendar-plus me-2"></i>Записать
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center mt-5">

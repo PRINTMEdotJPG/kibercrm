@@ -1,77 +1,56 @@
-.parent-card {
-    background: rgba(255, 255, 255, 0.067);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+/* Общие стили для таблицы */
+.table {
+    color: white !important;
 }
 
-.parent-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+/* Устанавливаем белый цвет текста для всех ячеек таблицы */
+.table th, 
+.table td {
+    color: white !important;
 }
 
-.parent-card .card-header {
-    background: linear-gradient(135deg, #4527a0 0%, #311b92 100%);
-    border-radius: 15px 15px 0 0;
-    padding: 1.2rem;
-    border: none;
-}
-
-.control-panel {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(30, 136, 229, 0.4);
-}
-
-.btn-outline {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-.info-block {
+/* Убираем стандартные стили Bootstrap для строк */
+.table tbody tr {
     background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
 }
 
-.status-badge {
-    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
+/* Чередующиеся строки с немного отличающимся фоном */
+.table tbody tr:nth-child(odd) {
+    background: #7f2fb1;
 }
 
-.action-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+.table tbody tr:nth-child(even) {
+    background: #6a1b9a;
 }
 
-.pagination {
+/* При наведении на строку добавляем эффект */
+.table tbody tr:hover {
     background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 10px;
 }
 
+/* Стиль для заголовков */
+.table th {
+    background: linear-gradient(135deg, #4527a0 0%, #311b92 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Стили для различных элементов внутри таблицы */
+.table ul li {
+    color: white !important;
+}
+
+.table td i {
+    color: white !important;
+}
+
+.table .text-danger {
+    color: #ff6b6b !important;
+}
+
+/* Пагинация */
 .pagination .page-link {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -87,6 +66,43 @@
     border-color: transparent;
 }
 
-.error-info {
-    color: red;
+/* Стиль для статуса */
+.status-badge {
+    background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+/* Стиль для кнопок */
+.btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Дополнительные стили для кнопок действий */
+.btn-outline-primary,
+.btn-outline-success {
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-success:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Стили для значков и иконок */
+.badge {
+    color: white !important;
+}
+
+.fas {
+    color: white !important;
 }

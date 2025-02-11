@@ -50,6 +50,9 @@ class Parent(models.Model):
         blank=True
     )
 
+    is_active = models.BooleanField(default=True, verbose_name="Активный")
+
+
 
     class Meta:
         verbose_name = "Родитель"

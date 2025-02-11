@@ -1,0 +1,83 @@
+    .locations-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .locations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .location-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .location-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .location-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.5rem;
+    }
+
+    .location-stats {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        color: #718096;
+        font-size: 0.9rem;
+    }
+
+    .location-stat {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .page-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: #667eea;
+        border-radius: 2px;
+    }
+
+    .add-location {
+        background: #667eea;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background 0.2s;
+    }
+
+    .add-location:hover {
+        background: #5a67d8;
+    }
+    a {
+        text-decoration: none;
+        }
+        
