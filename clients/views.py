@@ -5,20 +5,23 @@ from django.contrib.auth.decorators import login_required
 from .models import Parent
 from usersroles.models import CustomUser
 from location.models import Location
-from django.db.models import Count
+from django.db.models import Count, Q, FilteredRelation
 from django.core.exceptions import PermissionDenied
 
-# views.py
+from django.db.models import Count, Q
 
 @login_required
 def manager_locations(request):
     user = request.user
-    locations = user.linked_locations.annotate(num_students=Count('students'))
-    context = {'locations': locations,
-               }
+    locations = user.linked_locations.annotate(
+        num_active_students=Count(
+            'students',  # related_name от Child к Location
+            filter=Q(students__child_parent__is_active=True)
+        )
+    )
+    context = {'locations': locations}
     return render(request, 'clients/active_locations_for_manager.html', context)
 
-# views.py
 
 @login_required
 def location_parents(request, location_id):
