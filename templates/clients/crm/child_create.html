@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="card shadow-lg">
+        <form method="post" class="p-4">
+            {% csrf_token %}
+
+            <!-- Общие ошибки формы -->
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                <p class="mb-0">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="row g-3">
+                <!-- Имя -->
+                <div class="col-md-4">
+                    <label class="form-label">{{ form.name.label }}</label>
+                    {{ form.name }}
+                    <div class="form-text text-muted small">
+                        Введите официальное имя ребенка (как в документах)
+                    </div>
+                    <div class="form-text text-danger">{{ form.name.errors }}</div>
+                </div>
+
+                <!-- Фамилия -->
+                <div class="col-md-4">
+                    <label class="form-label">{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                    <div class="form-text text-muted small">
+                        Укажите фамилию, соответствующую свидетельству о рождении
+                    </div>
+                    <div class="form-text text-danger">{{ form.last_name.errors }}</div>
+                </div>
+
+                <!-- Отчество -->
+                <div class="col-md-4">
+                    <label class="form-label">{{ form.patronymic.label }}</label>
+                    {{ form.patronymic }}
+                    <div class="form-text text-muted small">
+                        При наличии (необязательное поле)
+                    </div>
+                    <div class="form-text text-danger">{{ form.patronymic.errors }}</div>
+                </div>
+
+                <!-- Дата рождения -->
+                <div class="col-md-6">
+                    <label class="form-label">{{ form.date_of_birth.label }}</label>
+                    {{ form.date_of_birth }}
+                    <div class="form-text text-muted small">
+                        Формат: ДД.ММ.ГГГГ (пример: 15.05.2020)
+                    </div>
+                    <div class="form-text text-danger">{{ form.date_of_birth.errors }}</div>
+                </div>
+
+                <!-- Локация -->
+                <div class="col-md-6">
+                    <label class="form-label">{{ form.location.label }}</label>
+                    {{ form.location }}
+                    <div class="form-text text-muted small">
+                        {% if parent.location %}
+                        Локация родителя: {{ parent.location.name }} 
+                        (выберите эту или другую из списка)
+                        {% else %}
+                        Обязательно укажите локацию
+                        {% endif %}
+                    </div>
+                    <div class="form-text text-danger">{{ form.location.errors }}</div>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save me-2"></i>Сохранить
+                </button>
+                <a href="{% if parent.location %}{% url 'location_parents' parent.location.id %}{% else %}{% url 'manager_locations' %}{% endif %}" 
+                   class="btn btn-outline-secondary">
+                    Отмена
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

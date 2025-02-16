@@ -10,17 +10,13 @@
     <!-- Control Panel -->
     <div class="control-panel mb-4">
         <div class="d-flex justify-content-between align-items-center">
-            <h3 class="text-white mb-0">Управление родителями</h3>
+            <h3 class="text-white mb-0">Управление родителями {{ location.name }}</h3>
             <div class="d-flex gap-3">
+                <a href="{% url 'parent_create' %}">
                 <button class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Добавить родителя
                 </button>
-                <button class="btn btn-outline-light">
-                    <i class="fas fa-file-export me-2"></i>Экспорт
-                </button>
-                <button class="btn btn-outline-light">
-                    <i class="fas fa-filter me-2"></i>Фильтры
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -54,6 +50,10 @@
                     {% else %}
                     <span class="text-danger">Нет детей</span>
                     {% endif %}
+                    <a href="{% url 'child_create' parent.id %}" 
+                        class="btn btn-outline-primary">
+                        <i class="fas fa-plus me-2"></i>+
+                    </a>
                 </td>
                 {% if parent.is_active == True %}
                 <td><span class="badge bg-success">Активный</span></td>

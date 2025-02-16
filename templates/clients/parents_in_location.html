@@ -1,8 +1,0 @@
-<h1>Родители в локации {{ location.name }}</h1>
-<ul>
-    {% for parent in parents %}
-        <li>{{ parent.last_name }} {{ parent.name }} {{ parent.patronymic }}</li>
-    {% empty %}
-        <li>В этой локации нет родителей.</li>
-    {% endfor %}
-</ul>

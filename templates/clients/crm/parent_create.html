@@ -1,0 +1,25 @@
+<!-- templates/clients/crm/parent_create.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Добавление нового родителя</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Вывод ошибок для каждого поля -->
+        {% for field in form %}
+        <div class="mb-3">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+          <div class="text-danger">
+            {% for error in field.errors %}{{ error }}<br>{% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
