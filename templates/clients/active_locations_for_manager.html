@@ -27,8 +27,14 @@
                     {{ location.num_active_students }} детей учатся на локации
                 </div>
             </div>
-        </div>
         </a>
+        <a href="{% url 'group_list_by_location' location.id %}" 
+                class="btn btn-outline-primary">
+            <i class="fas fa-plus me-2"></i>Группы
+        </a>
+        </div>        
+        <!--Переход на отображение групп локации-->
+        
         {% endfor %}
     </div>
 </div>

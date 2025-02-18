@@ -94,6 +94,10 @@ class Child(models.Model):
     def __str__(self):
         return f"{self.last_name} {self.name}"
     
+    @property
+    def full_name(self):
+        return f"{self.last_name} {self.name} {self.patronymic or ''}".strip()
+    
     class Meta:
         verbose_name = "Ребенок"
         verbose_name_plural = "Дети"

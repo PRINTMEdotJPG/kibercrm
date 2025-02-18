@@ -1,0 +1,38 @@
+<!-- Кнопки переключения локаций -->
+<div class="btn-group mb-4">
+    {% for loc in location_list %}
+      <a href="{% url 'group_list_by_location' loc.id %}"
+         class="btn {% if current_location.id == loc.id %}btn-active{% endif %}">
+        {{ loc.name }}
+      </a>
+    {% endfor %}
+  </div>
+  
+  <!-- Список групп -->
+  {% for group in groups %}
+    <div class="group-card">
+      <h3>{{ group.name }}</h3>
+      <div class="location">{{ group.location.name }}</div>
+      <div class="students-count">
+        Учеников: {{ group.students.count }}
+      </div>
+    </div>
+  {% empty %}
+    <div class="empty">Нет доступных групп</div>
+  {% endfor %}
+  
+  <!-- Пагинация -->
+  {% if is_paginated %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+      {% endif %}
+  
+      <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+  
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+      {% endif %}
+    </div>
+  {% endif %}
+  

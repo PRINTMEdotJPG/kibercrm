@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'usersroles',
     'clients',
     'location',
+    'groups',
 ]
 
 AUTH_USER_MODEL = 'usersroles.CustomUser'
