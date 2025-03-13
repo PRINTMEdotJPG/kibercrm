@@ -1,0 +1,108 @@
+/* CSS стили страницы group_detail.html в минималистичном стиле 2024-2025 */
+
+:root {
+    --main-bg-gradient: linear-gradient(135deg, #342b68, #4527a0, #320b86);
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --text-color: #e0e0ff;
+    --accent-color: #7c4dff;
+    --status-active: #4caf50;
+    --status-archive: #757575;
+}
+
+body {
+    background: var(--main-bg-gradient);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    max-width: 900px;
+    margin-top: 30px;
+}
+
+.group-card, .students-card {
+    background: var(--card-bg);
+    box-shadow: 0 8px 16px var(--card-shadow);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+}
+
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.group-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.badge.status {
+    background-color: var(--status-active);
+    color: #FFF;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+.group-info div {
+    margin-top: 8px;
+    font-size: 15px;
+}
+
+.students-card h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.students-table th, .students-table td {
+    padding: 12px 20px;
+    text-align: left;
+}
+
+.students-table th {
+    background-color: rgba(255,255,255,0.1);
+    color: #ffffff;
+    border-radius: 8px 8px 0 0;
+}
+
+.students-table tbody tr {
+    background-color: rgba(255, 255, 255, 0.03);
+    transition: background 0.3s ease;
+}
+
+.students-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.no-students {
+    text-align: center;
+    color: #bbb;
+    padding: 15px 0;
+}
+
+.btn-back {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-back:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+}

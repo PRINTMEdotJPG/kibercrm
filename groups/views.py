@@ -2,7 +2,7 @@
 from django.views.generic import ListView, DetailView
 from .models import Group
 from location.models import Location
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 class LocationGroupListView(ListView):
     model = Group
@@ -61,3 +61,25 @@ class GroupListView(LocationGroupListView):
         context.pop('current_location', None)
         return context
     
+def group_detail(request, pk):
+    """
+    Представление выводит детальную информацию о группе и её учениках.
+
+    Args:
+        request (HttpRequest): объект запроса пользователя
+        pk (int): первичный ключ объекта группы (Group), получаемый из URL
+
+    Returns:
+        HttpResponse: отрендеренный шаблон с деталями группы
+    """
+    # Получаем объект группы по первичному ключу (pk),
+    # либо выдаём страницу 404, если такой группы не существует
+    group = get_object_or_404(Group, pk=pk)
+
+    # Передаем объект группы в шаблон
+    context = {
+        'group': group,
+        'students': group.students.all(),  # queryset учеников группы
+    }
+
+    return render(request, 'groups/group_detail.html', context)

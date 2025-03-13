@@ -11,11 +11,14 @@
   <!-- Список групп -->
   {% for group in groups %}
     <div class="group-card">
-      <h3>{{ group.name }}</h3>
+        <p>
+            <a href="{% url 'group_detail' group.pk %}">{{ group.name }}</a>
+        </p>
       <div class="location">{{ group.location.name }}</div>
       <div class="students-count">
         Учеников: {{ group.students.count }}
       </div>
+      
     </div>
   {% empty %}
     <div class="empty">Нет доступных групп</div>

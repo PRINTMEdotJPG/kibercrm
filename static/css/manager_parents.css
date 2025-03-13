@@ -1,0 +1,147 @@
+:root {
+    --gradient-bg: linear-gradient(145deg, #342b68, #4527a0, #320b86);
+    --card-bg: rgba(255,255,255,0.05);
+    --accent: #7c4dff;
+    --text-color: #e0e0ff;
+    --success-color: #20c997;
+    --inactive-color: #ff6b6b;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient-bg);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1100px;
+    margin-top: 30px;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content h2 {
+    font-weight: 700;
+}
+
+.btn-accent {
+    text-decoration: none;
+    background: var(--accent);
+    color: #fff;
+    padding: 9px 18px;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-accent:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modern-table th, .modern-table td {
+    padding: 14px;
+    text-align: left;
+}
+
+.modern-table th {
+    background-color: rgba(255,255,255,0.1);
+    color: #e9e9e9;
+    border-radius: 8px 8px 0 0;
+}
+
+.modern-table tr {
+    transition: background-color 0.25s ease;
+}
+
+.modern-table tr:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.children-list {
+    padding-left: 14px;
+    margin: 0;
+}
+
+.no-children {
+    color: var(--inactive-color);
+    font-style: italic;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px; 
+    border-radius: 8px;
+    font-size: 0.85em;
+}
+
+.badge.active {
+    background: var(--success-color);
+}
+
+.badge.archive {
+    background: var(--inactive-color);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.85em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-outline-accent {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    transition: all 0.2s;
+}
+
+.btn-outline-accent:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.pagination li a {
+    display: block;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border-radius: 8px;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.pagination li.active a, .pagination li a:hover {
+    background: var(--accent);
+}

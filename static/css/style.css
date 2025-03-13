@@ -59,3 +59,33 @@ body {
 .container {
     color: white;
 }
+
+.user-avatar {
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.navbar-toggler-icon {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.alert {
+    backdrop-filter:blur(15px);
+}
+
+.dropdown-menu-dark {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0,0,0,0.75);
+}
+
+.dropdown-item i {
+    margin-right: 7px;
+}
+
+.main-content {
+    margin-top:80px;
+    padding-bottom:40px;
+}

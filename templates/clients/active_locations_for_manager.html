@@ -1,40 +1,38 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Мои локации{% endblock %}
 
 {% block extra_css %}
-<link href="{% static 'css/active_locations_style.css' %}?v=1.0" rel="stylesheet">
+<link href="{% static 'css/active_locations_style.css' %}?v=3.0" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-<div class="locations-container">
-    <div class="header-actions">
-        <h1 class="page-title">Мои локации</h1>
+<div class="container">
+    <div class="card header-card">
+        <div class="header-content">
+            <h1>🌍 Мои локации</h1>
+        </div>
     </div>
 
     <div class="locations-grid">
         {% for location in locations %}
-        <a href="{% url 'location_parents' location.id %}">
-        <div class="location-card">
-            <h2 class="location-name">{{ location.name }}</h2>
-            <div class="location-stats">
-                <div class="location-stat">
-                    {{ location.address }}
+        <div class="card location-card">
+            <a href="{% url 'location_parents' location.id %}" class="location-link">
+                <h2 class="location-name">{{ location.name }}</h2>
+                <div class="location-info">
+                    <div class="address">
+                        <i class="fas fa-map-marker-alt"></i> {{ location.address }}
+                    </div>
+                    <div class="students-count">
+                        <i class="fas fa-user-graduate"></i> {{ location.num_active_students }} учеников
+                    </div>
                 </div>
-                <div class="location-stat">
-                    {{ location.num_active_students }} детей учатся на локации
-                </div>
-            </div>
-        </a>
-        <a href="{% url 'group_list_by_location' location.id %}" 
-                class="btn btn-outline-primary">
-            <i class="fas fa-plus me-2"></i>Группы
-        </a>
-        </div>        
-        <!--Переход на отображение групп локации-->
-        
+            </a>
+            <a href="{% url 'group_list_by_location' location.id %}" class="btn btn-outline-accent groups-btn">
+                <i class="fas fa-layer-group"></i> Группы
+            </a>
+        </div>
         {% endfor %}
     </div>
 </div>

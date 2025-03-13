@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/group_detail.css' %}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="group-card">
+        <div class="group-header">
+            <h1>{{ group.name }}</h1>
+            <span class="badge status">{{ group.get_status_display }}</span>
+        </div>
+        <div class="group-info">
+            <div><strong>Локация:</strong> {{ group.location }}</div>
+            <div><strong>Расписание:</strong> {{ group.schedule }}</div>
+            <div><strong>Старт занятий:</strong> {{ group.start_date|date:"d.m.Y" }}</div>
+        </div>
+    </div>
+
+    <div class="students-card">
+        <h2>👩‍🎓👨‍🎓 Ученики группы ({{ students.count }})</h2>
+        {% if students %}
+            <table class="students-table">
+                <thead>
+                    <tr>
+                        <th>Имя ученика</th>
+                        <th>Возраст</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                        <tr>
+                            <td>{{ student.full_name }}</td>
+                            <td>{{ student.age }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-students">В группе пока нет учеников 😔</p>
+        {% endif %}
+    </div>
+
+    <a href="" class="btn-back">
+        ← Назад
+    </a>
+</div>
+{% endblock %}

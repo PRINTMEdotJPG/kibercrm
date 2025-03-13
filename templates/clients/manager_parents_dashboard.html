@@ -2,96 +2,74 @@
 {% load static %}
 
 {% block extra_css %}
-<link href="{% static 'css/managerparents.css' %}?v=1.0" rel="stylesheet">
+<link href="{% static 'css/manager_parents.css' %}?v=2.0" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <div class="container">
-    <!-- Control Panel -->
-    <div class="control-panel mb-4">
-        <div class="d-flex justify-content-between align-items-center">
-            <h3 class="text-white mb-0">Управление родителями {{ location.name }}</h3>
-            <div class="d-flex gap-3">
-                <a href="{% url 'parent_create' %}">
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus me-2"></i>Добавить родителя
-                </button>
-                </a>
-            </div>
+    <div class="card header-card">
+        <div class="header-content">
+            <h2>📚 Управление родителями — {{ location.name }}</h2>
+            <a href="{% url 'parent_create' %}" class="btn btn-accent">
+                <i class="fas fa-plus"></i> Добавить родителя
+            </a>
         </div>
     </div>
 
-    <!-- Parents Table -->
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr class="text-white" style="background-color: #4527a0;">
-                <th>Имя родителя</th>
-                <th>Телефон</th>
-                <th>Дети</th>
-                <th>Статус</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for parent in parents %}
-            <tr class="text-white">
-                <td>{{ parent.last_name }} {{ parent.name }}</td>
-                <td>
-                    <i class="fas fa-phone me-2"></i> 
-                    {{ parent.phone_number }}
-                </td>
-                <td>
-                    {% if parent.children.all %}
-                    <ul>
-                        {% for child in parent.children.all %}
-                        <li>{{ child.name }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                    <span class="text-danger">Нет детей</span>
-                    {% endif %}
-                    <a href="{% url 'child_create' parent.id %}" 
-                        class="btn btn-outline-primary">
-                        <i class="fas fa-plus me-2"></i>+
-                    </a>
-                </td>
-                {% if parent.is_active == True %}
-                <td><span class="badge bg-success">Активный</span></td>
-                {% else %}
-                <td><span class="badge bg-unsuccess">Неактивный</span></td>
+    <div class="card parents-card">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>👤 Имя родителя</th>
+                    <th>📞 Телефон</th>
+                    <th>👦 Дети</th>
+                    <th>⚙️ Статус</th>
+                    <th>💬 Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for parent in parents %}
+                <tr>
+                    <td>{{ parent.last_name }} {{ parent.name }}</td>
+                    <td>{{ parent.phone_number }}</td>
+                    <td>
+                        <ul class="children-list">
+                            {% for child in parent.children.all %}
+                                <li>{{ child.name }}</li>
+                            {% empty %}
+                                <li class="no-children">Нет детей</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{% url 'child_create' parent.id %}" class="btn btn-small btn-outline-accent">
+                            <i class="fas fa-plus"></i> Добавить
+                        </a>
+                    </td>
+                    <td>
+                        {% if parent.is_active %}
+                            <span class="badge active">Активный</span>
+                        {% else %}
+                            <span class="badge archive">Неактивный</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="btn btn-small btn-outline-accent">
+                            <i class="fas fa-comments"></i> Сообщение
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-                {% endif %}
-                <td>
-                    <button class="btn btn-outline-primary">
-                        <i class="fas fa-comments me-2"></i>Сообщение
-                    </button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <!-- Pagination -->
-    <div class="d-flex justify-content-center mt-5">
-        <nav class="pagination">
-            <ul class="pagination mb-0">
-                <li class="page-item">
-                    <a class="page-link" href="#">Предыдущая</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Следующая</a>
-                </li>
-            </ul>
-        </nav>
+    <div class="pagination-wrapper">
+        <ul class="pagination">
+            <li><a href="#">← Предыдущая</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">Следующая →</a></li>
+        </ul>
     </div>
 </div>
 {% endblock %}

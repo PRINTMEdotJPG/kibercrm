@@ -11,6 +11,13 @@ urlpatterns = [
         views.LocationGroupListView.as_view(),
         name='group_list_by_location'
     ),
+    path('groups/<int:pk>/',
+          views.group_detail,
+        name='group_detail'),
+
+    # path('locations/group_detail/<int:group_id>',
+    #      views.GroupDetailView.as_view(),
+    #      name='group_detail')
     # path(
     #     'groups/<int:pk>/',
     #     views.GroupDetailView.as_view(),
